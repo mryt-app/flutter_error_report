@@ -1,0 +1,29 @@
+PODS:
+  - Bugly (2.5.0)
+  - Flutter (1.0.0)
+  - flutter_error_report (0.0.1):
+    - Bugly
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_error_report (from `.symlinks/plugins/flutter_error_report/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Bugly
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  flutter_error_report:
+    :path: ".symlinks/plugins/flutter_error_report/ios"
+
+SPEC CHECKSUMS:
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_error_report: 1a0a09fd1fb15011cdf8283bbde16dda6056e546
+
+PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
+
+COCOAPODS: 1.6.1
