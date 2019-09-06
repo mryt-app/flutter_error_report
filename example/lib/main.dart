@@ -10,7 +10,7 @@ bool get isInDebugMode {
 
   // Assert表达式只在开发模式下会被解析，在production模式下会被忽略。
   // 因此，以下代码只在开发模式下会将`inDebugMode`设为true。
-  // assert(inDebugMode = true);
+  assert(inDebugMode = true);
 
   return inDebugMode;
 }
