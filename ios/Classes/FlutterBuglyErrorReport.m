@@ -8,6 +8,7 @@
 #import "FlutterBuglyErrorReport.h"
 #import <Bugly/Bugly.h>
 #import "NSDictionary+FERUtility.h"
+#import "NSString+FERUtility.h"
 
 @implementation FlutterBuglyErrorReport
 
@@ -16,6 +17,9 @@
     NSString *channel = [config fer_valueForKey:@"channel" defaultValue:nil];
     NSString *deviceId = [config fer_valueForKey:@"deviceId" defaultValue:[[UIDevice currentDevice].identifierForVendor UUIDString]];
     NSNumber *reportLogLevel = [config fer_valueForKey:@"reportLogLevel" defaultValue:@(0)];
+    if ([NSString fer_isEmpty:deviceId]) {
+        deviceId = [[UIDevice currentDevice].identifierForVendor UUIDString];
+    }
     
     BuglyConfig *buglyConfig = [BuglyConfig new];
     buglyConfig.debugMode = debugMode.boolValue;
