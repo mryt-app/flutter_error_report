@@ -62,8 +62,10 @@
     NSString *message = [arguments fer_valueForKey:@"message" defaultValue:@""];
     NSArray<NSDictionary *> *traces = arguments[@"trace"];
     BOOL forceCrash = arguments[@"forceCrash"] ? [arguments[@"forceCrash"] boolValue] : false;
-    NSArray<FERStackFrame *> *stackFrames = [traces fer_select:^id _Nonnull(id  _Nonnull item) {
+    NSArray<NSString *> *stackFrames = [[traces fer_select:^id _Nonnull(id  _Nonnull item) {
         return [FERStackFrame stackFrameWithTrace:item];
+    }] fer_select:^id _Nonnull(id  _Nonnull item) {
+        return [item description];
     }];
 //    FERFlutterException *exception = [FERFlutterException exceptionWithName:cause reason:message stackFrames:stackFrames];
     if (_buglyInitialized) {

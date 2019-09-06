@@ -14,7 +14,7 @@
 + (void)startWithAppId:(NSString *)appId config:(NSDictionary *)config {
     NSNumber *debugMode = [config fer_valueForKey:@"debugMode" defaultValue:@(NO)];
     NSString *channel = [config fer_valueForKey:@"channel" defaultValue:nil];
-    NSString *deviceId = [config fer_valueForKey:@"deviceId" defaultValue:nil];
+    NSString *deviceId = [config fer_valueForKey:@"deviceId" defaultValue:[[UIDevice currentDevice].identifierForVendor UUIDString]];
     NSNumber *reportLogLevel = [config fer_valueForKey:@"reportLogLevel" defaultValue:@(0)];
     
     BuglyConfig *buglyConfig = [BuglyConfig new];
@@ -22,6 +22,7 @@
     buglyConfig.channel = channel;
     buglyConfig.deviceIdentifier = deviceId;
     buglyConfig.reportLogLevel = reportLogLevel.integerValue;
+    buglyConfig.version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
     [Bugly startWithAppId:appId config:buglyConfig];
 }

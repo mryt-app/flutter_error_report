@@ -10,7 +10,7 @@ bool get isInDebugMode {
 
   // Assert表达式只在开发模式下会被解析，在production模式下会被忽略。
   // 因此，以下代码只在开发模式下会将`inDebugMode`设为true。
-  assert(inDebugMode = true);
+  // assert(inDebugMode = true);
 
   return inDebugMode;
 }
@@ -30,9 +30,9 @@ void main() async {
   bool optIn = true;
   if (optIn) {
     await FlutterErrorReport()
-      .initializeBugly('b79b139c7e', FlutterErrorReportConfig(debugMode: true, reportLogLevel: FlutterErrorReportLogLevel.verbose));
+      .initializeBugly('acf0e2018c', FlutterErrorReportConfig(debugMode: true, reportLogLevel: FlutterErrorReportLogLevel.verbose));
   } else {
-    // In this case Crashlytics won't send any reports.
+    // In this case won't send any reports.
     // Usually handling opt in/out is required by the Privacy Regulations
   }
 
