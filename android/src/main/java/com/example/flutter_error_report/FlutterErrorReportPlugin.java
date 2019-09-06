@@ -37,7 +37,6 @@ public class FlutterErrorReportPlugin implements MethodCallHandler {
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
-        Log.d("fanlei", "method = " + call.method);
         try {
             if (call.method.equals("initializeBugly")) {
                 // 初始化Bugly

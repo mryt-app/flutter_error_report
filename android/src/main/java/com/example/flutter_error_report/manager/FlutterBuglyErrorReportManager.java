@@ -1,10 +1,10 @@
 package com.example.flutter_error_report.manager;
 
 import android.content.Context;
-import android.util.Log;
 import com.example.flutter_error_report.bean.ErrorInfoBean;
-import com.example.flutter_error_report.utils.ErrorReportUtils;
 import com.tencent.bugly.crashreport.CrashReport;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * @ Description: Bugly管理类
@@ -14,6 +14,7 @@ import com.tencent.bugly.crashreport.CrashReport;
  */
 public class FlutterBuglyErrorReportManager {
 
+    private final String TAG = "FlutterBuglyErrorReport";
 
     private static class FlutterBuglyErrorReportManagerInstance {
 
@@ -36,7 +37,6 @@ public class FlutterBuglyErrorReportManager {
      * @param isDebug 是否开始debug模式
      */
     public void initBugly(Context context, String appId, boolean isDebug) {
-        Log.d("fanlei", "appId = " + appId);
         CrashReport.initCrashReport(context, appId, isDebug);
     }
 
@@ -46,7 +46,6 @@ public class FlutterBuglyErrorReportManager {
      * @param userId 用户ID
      */
     public void setUserIdToBugly(String userId) {
-        Log.d("fanlei", "userId = " + userId);
         CrashReport.setUserId(userId);
     }
 
@@ -56,10 +55,16 @@ public class FlutterBuglyErrorReportManager {
      * @param uploadErrorBean 错误信息类
      */
     public void uploadErrorToBugly(ErrorInfoBean uploadErrorBean) {
-        Log.d("fanlei", "ErrorInfoBean = " + uploadErrorBean.toString());
-        CrashReport
-                .postException(8, "Flutter Exception ->", uploadErrorBean.getMessage(), uploadErrorBean.getCause(),
-                        null);
+        try {
+            JSONArray jsonArray = new JSONArray();
+            for (int i = 0; i < uploadErrorBean.getTrace().size(); i++) {
+                jsonArray.put(i,uploadErrorBean.getTrace().get(i));
+            }
+            CrashReport.postException(8, uploadErrorBean.getCause(), uploadErrorBean.getMessage(), jsonArray.toString(4),
+                    null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
