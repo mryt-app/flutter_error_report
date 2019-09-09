@@ -46,19 +46,7 @@
 
 - (NSString *)description
 {
-    NSDictionary *properties = @{
-                                 @"symbol": self.symbol ?: @"",
-                                 @"rawSymbol": self.rawSymbol ?: @"",
-                                 @"library": self.library ?: @"",
-                                 @"fileName": self.fileName ?: @"",
-                                 @"lineNumber": self.lineNumber != 0 ? @(self.lineNumber) : @"",
-                                 @"offset": self.offset != 0 ? @(self.offset) : @"",
-                                 @"address": self.address != 0 ? @(self.address) : @"",
-                                 };
-    properties = [properties fer_removeEmptyValues];
-    NSData *propertiesJSONData = [NSJSONSerialization dataWithJSONObject:properties options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *propertiesJSONString = [[NSString alloc] initWithData:propertiesJSONData encoding:NSUTF8StringEncoding];
-    return [NSString stringWithFormat:@"<class: %@>, properties: %@\n", self.class, propertiesJSONString];
+    return [NSString stringWithFormat:@"%@(%@:%u)", self.symbol ?: @"", self.fileName, self.lineNumber];
 }
 
 @end
