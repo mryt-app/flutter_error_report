@@ -1,10 +1,10 @@
 package com.example.flutter_error_report.manager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import com.example.flutter_error_report.bean.ErrorInfoBean;
 import com.tencent.bugly.crashreport.CrashReport;
-import org.json.JSONArray;
-import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * @ Description: Bugly管理类
@@ -52,17 +52,27 @@ public class FlutterBuglyErrorReportManager {
     /**
      * 上传错误信息
      *
-     * @param uploadErrorBean 错误信息类
+     * @param bean 错误信息类
      */
-    public void uploadErrorToBugly(ErrorInfoBean uploadErrorBean) {
+    @SuppressLint("DefaultLocale")
+    public void uploadErrorToBugly(ErrorInfoBean bean) {
         try {
-            JSONArray jsonArray = new JSONArray();
-            for (int i = 0; i < uploadErrorBean.getTrace().size(); i++) {
-                jsonArray.put(i,uploadErrorBean.getTrace().get(i));
+
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < bean.getTrace().size(); i++) {
+                JSONObject jsonObject = new JSONObject(bean.getTrace().get(i));
+                String temp = String.format("%s.%s(%s:%d)\n",
+                        jsonObject.optString("class"),
+                        jsonObject.optString("method"),
+                        jsonObject.optString("library"),
+                        jsonObject.optInt("line"));
+                builder.append(temp);
             }
-            CrashReport.postException(8, uploadErrorBean.getCause(), uploadErrorBean.getMessage(), jsonArray.toString(4),
-                    null);
-        } catch (JSONException e) {
+
+            // 上传错误异常
+            CrashReport.postException(8, bean.getCause(), bean.getMessage(), builder.toString(), null);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

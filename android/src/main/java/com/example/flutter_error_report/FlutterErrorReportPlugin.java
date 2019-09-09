@@ -13,6 +13,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONObject;
 
@@ -102,7 +103,7 @@ public class FlutterErrorReportPlugin implements MethodCallHandler {
         if (TextUtils.isEmpty(message)) {
             message = "";
         }
-        ArrayList<String> trace = call.argument("trace");
+        ArrayList<HashMap> trace = call.argument("trace");
         Boolean forceCrash = call.argument("forceCrash");
 
         // 包装

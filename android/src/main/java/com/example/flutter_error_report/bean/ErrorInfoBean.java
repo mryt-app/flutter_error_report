@@ -1,6 +1,7 @@
 package com.example.flutter_error_report.bean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,7 +16,7 @@ public class ErrorInfoBean {
 
     private String message;
 
-    private ArrayList<String> trace;
+    private ArrayList<HashMap> trace;
 
     private Boolean forceCrash;
 
@@ -38,11 +39,11 @@ public class ErrorInfoBean {
         this.message = message;
     }
 
-    public ArrayList<String> getTrace() {
+    public ArrayList<HashMap> getTrace() {
         return trace;
     }
 
-    public void setTrace(ArrayList<String> trace) {
+    public void setTrace(ArrayList<HashMap> trace) {
         this.trace = trace;
     }
 
@@ -59,7 +60,7 @@ public class ErrorInfoBean {
         return "ErrorInfoBean{" +
                 "cause='" + cause + '\'' +
                 ", message='" + message + '\'' +
-                ", trace=" + trace +
+                ", trace=" + trace.toString() +
                 ", forceCrash=" + forceCrash +
                 '}';
     }
