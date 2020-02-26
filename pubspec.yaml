@@ -1,8 +1,8 @@
 name: flutter_error_report
-description: A new flutter plugin project.
+description: A flutter plugin for error report, supports Bugly now, but can add other supports easily.
 version: 0.0.1
-author:
-homepage:
+author: Mryt-App <mryt-appzu@missfresh.cn>
+homepage: https://github.com/mryt-app/flutter_error_report
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
